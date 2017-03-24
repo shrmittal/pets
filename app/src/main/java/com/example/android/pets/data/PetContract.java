@@ -7,8 +7,13 @@ import android.provider.BaseColumns;
  */
 public final class PetContract {
 
+
+
     private PetContract() {
     }
+
+    public final static String CONTENT_AUTHORITY="content://com.example..android.pets";
+    public final static String PATH_PETS="pets";
 
     public static final class PetEntry implements BaseColumns{
 
@@ -22,5 +27,7 @@ public final class PetContract {
         public final static int GENDER_UNKNOWN=0;
         public final static int GENDER_MALE=1;
         public final static int GENDER_FEMALE=2;
+
+
     }
 }
