@@ -133,27 +133,28 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private void savePet() {
 
-
-        if (mCurrentPetUri == null) {
-            // Read from input fields
+// Read from input fields
 // Use trim to eliminate leading or trailing white space
-            String nameString = mNameEditText.getText().toString().trim();
-            String breedString = mBreedEditText.getText().toString().trim();
-            String weightString = mWeightEditText.getText().toString().trim();
-            int weight = Integer.parseInt(weightString);
+        String nameString = mNameEditText.getText().toString().trim();
+        String breedString = mBreedEditText.getText().toString().trim();
+        String weightString = mWeightEditText.getText().toString().trim();
+        int weight = Integer.parseInt(weightString);
 
 
-            //we don't require the following now.
+        //we don't require the following now.
         /*PetDbHelper mDbHelper=new PetDbHelper(this);
         SQLiteDatabase db=mDbHelper.getWritableDatabase();*/
 
-            // Create a ContentValues object where column names are the keys,
-            // and pet attributes from the editor are the values.
-            ContentValues values = new ContentValues();
-            values.put(PetEntry.COLUMN_PET_NAME, nameString);
-            values.put(PetEntry.COLUMN_PET_BREED, breedString);
-            values.put(PetEntry.COLUMN_PET_GENDER, mGender);
-            values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
+        // Create a ContentValues object where column names are the keys,
+        // and pet attributes from the editor are the values.
+        ContentValues values = new ContentValues();
+        values.put(PetEntry.COLUMN_PET_NAME, nameString);
+        values.put(PetEntry.COLUMN_PET_BREED, breedString);
+        values.put(PetEntry.COLUMN_PET_GENDER, mGender);
+        values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
+
+        if (mCurrentPetUri == null) {
+
 
             //
             // long newRowid=db.insert(PetEntry.TABLE_NAME, null, values);
@@ -169,15 +170,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         else {
 
-            String nameString = mNameEditText.getText().toString().trim();
-            String breedString = mBreedEditText.getText().toString().trim();
-            String weightString = mWeightEditText.getText().toString().trim();
-            int weight = Integer.parseInt(weightString);
-            ContentValues values = new ContentValues();
-            values.put(PetEntry.COLUMN_PET_NAME, nameString);
-            values.put(PetEntry.COLUMN_PET_BREED, breedString);
-            values.put(PetEntry.COLUMN_PET_GENDER, mGender);
-            values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
+
             // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
             // because mCurrentPetUri will already identify the correct row in the database that
