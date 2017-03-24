@@ -243,6 +243,8 @@ public class PetProvider extends ContentProvider {
         // Otherwise, get writeable database to update the data
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
+        getContext().getContentResolver().notifyChange(uri,null);
+
         // Returns the number of database rows affected by the update statement
         return database.update(PetContract.PetEntry.TABLE_NAME, contentValues, selection, selectionArgs);
 
@@ -260,12 +262,14 @@ public class PetProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PETS:
+                getContext().getContentResolver().notifyChange(uri,null);
                 // Delete all rows that match the selection and selection args
                 return database.delete(PetContract.PetEntry.TABLE_NAME, selection, selectionArgs);
             case PETS_ID:
                 // Delete a single row given by the ID in the URI
                 selection = PetContract.PetEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                getContext().getContentResolver().notifyChange(uri,null);
                 return database.delete(PetContract.PetEntry.TABLE_NAME, selection, selectionArgs);
 
             default:
