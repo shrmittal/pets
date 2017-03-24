@@ -73,8 +73,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         Intent intent=getIntent();
          mCurrentPetUri=intent.getData();
-        if(mCurrentPetUri==null)
+        if(mCurrentPetUri==null) {
             setTitle("Add a Pet");
+            invalidateOptionsMenu();
+        }
         else {
             setTitle("Edit a pet");
 
@@ -300,5 +302,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
           mWeightEditText.setText("");
         mGenderSpinner.setSelection(0); // Select "Unknown" gender
 
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+         super.onPrepareOptionsMenu(menu);
+        if(mCurrentPetUri==null)
+        {
+            MenuItem menuItem=menu.findItem(R.id.action_delete);
+            menuItem.setVisible(false);
+        }
+        return true;
     }
 }
